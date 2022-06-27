@@ -30,6 +30,17 @@ public class Lesson03Quiz01Controller {
 		return realEstateBO.getRealEstateByRentPrice(rentPrice);
 	}
 	
+	@RequestMapping("/lesson03/quiz01/3")
+	public List<RealEstate> ex03(
+			@RequestParam("area")int area,
+			@RequestParam("price")int price
+			){
+		
+		return realEstateBO.getRealEstateByAreaAndPrice(area, price);
+	}
+	
+	
+	
 //	http://localhost:8080/lesson03/quiz02/1
 	@RequestMapping("/lesson03/quiz02/1")
 	public String quiz02_1() {
@@ -63,5 +74,27 @@ public class Lesson03Quiz01Controller {
 		return row +"입력완료";
 		
 	}
+	
+	@RequestMapping("/lesson03/quiz03/1")
+	public String quiz03(@RequestParam("id")int id ,
+						@RequestParam("type")String type,
+						@RequestParam("price")int price
+						) {
+		
+		
+		 
+			int row =	realEstateBO.updateRealEstateById(id, type, price);
+				
+				return "수정성공: "+ row;
+	}
+	
+	@RequestMapping("/lesson03/quiz04/1")
+	public String quiz04(@RequestParam("id")int id) {
+		
+	int row	= realEstateBO.deleteRealEstateById(id);
+		 
+		 return "삭제성공:"+ row;
+	}
+
 	
 }
