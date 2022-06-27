@@ -20,4 +20,9 @@ public class RealEstateBO {
 		return realEstateDAO.selectRealEstateById(id);
 	}
 	
+	public RealEstate getRealEstateByRentPrice(int rentPrice) {
+		
+		return;
+	}
+	
 }

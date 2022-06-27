@@ -12,4 +12,5 @@ public interface RealEstateDAO {
 	
 	public RealEstate selectRealEstateById(@Param("id")int id);
 	
+	public RealEstate selectRealEstateByRentPrice(@Param("rentPrice") int rentPrice);
 }

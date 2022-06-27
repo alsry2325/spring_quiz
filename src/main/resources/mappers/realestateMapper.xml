@@ -23,5 +23,19 @@
  			`id`= #{id}
  
  </select>
+ 	<select id="selectRealEstateByRentPrice"  parameterType="int" resultType="com.quiz.lesson03.model.RealEstate">
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	</select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  </mapper>

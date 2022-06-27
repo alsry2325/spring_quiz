@@ -22,5 +22,11 @@ public class Lesson03Quiz01Controller {
 		return realEstateBO.getRealEstateById(id);
 		
 	}
+	@RequestMapping("/lesson03/quiz01/2")
+	public RealEstate ex02() {
+		
+	}
+	
+	
 	
 }
