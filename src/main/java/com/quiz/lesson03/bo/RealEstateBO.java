@@ -1,5 +1,7 @@
 package com.quiz.lesson03.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,21 @@ public class RealEstateBO {
 		return realEstateDAO.selectRealEstateById(id);
 	}
 	
-	public RealEstate getRealEstateByRentPrice(int rentPrice) {
+	public List<RealEstate> getRealEstateByRentPrice(int rentPrice) {
 		
-		return;
+		return realEstateDAO.selectRealEstateByRentPrice(rentPrice);
+	}
+	
+	public int addRealEstate(RealEstate realEstate) {
+		
+		return realEstateDAO.insertRealEstate(realEstate);
+	}
+	
+	public int addRealEstateAsField(int realtorId,String address, int area,String type,int price, Integer rentPrice) {
+		
+		
+		return realEstateDAO.insertRealEstateAsField(realtorId, address, area, type, price, rentPrice);
+		
 	}
 	
 }
