@@ -39,12 +39,37 @@ public class Lesson04Quiz01Controller {
 		return "lesson04/after_add_seller";
 	}
 	
-	@GetMapping("/quiz01/seller_info")
-	public String sellerInfo(Model model) {
+//	@GetMapping("/quiz01/seller_info")
+//	public String sellerInfo(Model model) {
+//		
+//		Seller seller = sellerBO.getLastSeller();
+//		
+//		model.addAttribute("result", seller);
+//		
+//		model.addAttribute("LastSeller", "판매자정보");
+//		
+//		return  "lesson04/last_seller";
+//	}
+	
+	// http://localhost:8080/lesson04/quiz01/seller_info
+	// http://localhost:8080/lesson04/quiz01/seller_info?id=5
+	@GetMapping("/quiz01/seller_info")//required=false db에 널값 허용안되서 씀
+	public String sellerInfo(Model model ,
+			@RequestParam(value="id", required=false) Integer id) {
 		
-		Seller seller = 
-		
-		return ;
+			Seller seller = null;
+			if (id == null) {
+				seller = sellerBO.getLastSeller();
+			} else {
+				seller = sellerBO.getSellerById(id);
+			}
+			
+			model.addAttribute("seller", seller);
+			
+			model.addAttribute("LastSeller", "판매자정보");
+			
+			return  "lesson04/last_seller";
 	}
+	
 	
 }
