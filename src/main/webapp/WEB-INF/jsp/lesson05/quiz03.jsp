@@ -53,8 +53,11 @@
 				<c:forEach items="${cardBills}" var="cardBill" > 
 			      <tr>
 						<td>${cardBill.store}</td>
-						<td>${cardBill.pay}</td>
-					<td><fmt:formatDate value="${cardBill.date}" pattern="yyyy년 MM월 dd일"/></td>	
+						<td><fmt:formatNumber value="${cardBill.pay}"  /></td>
+					<td>
+						<fmt:parseDate value="${cardBill.date}" pattern="yyyy-MM-dd" var="date"/>
+						<fmt:formatDate value="${date}" pattern="yyyy년 M월d일"/>
+					</td>	
 						<td>${cardBill.installment}</td>
 				</tr>
 				</c:forEach>
