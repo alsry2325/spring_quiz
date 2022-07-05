@@ -20,18 +20,24 @@ public class Lesson05Quiz05Controller {
 	@Autowired
 	WeatherHistoryBO weatherHistoryBO;
 
-	// 웹사이트
+	// 웹사이트 http://localhost:8080/lesson05/quiz05/1
 	@RequestMapping("/quiz05/1")
-	public String quiz05() {
+	public String quiz05_1() {
 
 		return "lesson05/quiz05";
 	}
+	@RequestMapping("/quiz05/2")
+	public String quiz05_2() {
+
+		return "lesson05/quiz05_2";
+	}
+	
 
 	@RequestMapping("/quiz05/allSelectWeatherHistory")
 	public String allSelectWeatherHistory(
 
 			Model model) {
-
+ 
 		List<WeatherHistory> weatherHistory = new ArrayList<>();
 		weatherHistory = weatherHistoryBO.getWeatherHistory();
 
