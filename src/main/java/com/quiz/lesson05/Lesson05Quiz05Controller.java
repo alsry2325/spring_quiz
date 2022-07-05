@@ -18,31 +18,28 @@ import com.quiz.lesson05.model.WeatherHistory;
 public class Lesson05Quiz05Controller {
 
 	@Autowired
-	WeatherHistoryBO weatherHistoryBO;
-
-	// 웹사이트 http://localhost:8080/lesson05/quiz05/1
-	@RequestMapping("/quiz05/1")
-	public String quiz05_1() {
-
+	private WeatherHistoryBO weatherHistoryBO;
+	
+	@RequestMapping("/weather_history_view")
+	public String weatherHistoryView(Model model) {
+		List<WeatherHistory> weatherHistoryList = weatherHistoryBO.getWeatherHistoryList();
+		model.addAttribute("weatherHistorys", weatherHistoryList);
 		return "lesson05/quiz05";
-	}
-	@RequestMapping("/quiz05/2")
-	public String quiz05_2() {
-
-		return "lesson05/quiz05_2";
 	}
 	
-
-	@RequestMapping("/quiz05/allSelectWeatherHistory")
-	public String allSelectWeatherHistory(
-
-			Model model) {
- 
-		List<WeatherHistory> weatherHistory = new ArrayList<>();
-		weatherHistory = weatherHistoryBO.getWeatherHistory();
-
-		model.addAttribute("weatherHistorys", weatherHistory);
-
-		return "lesson05/quiz05";
+//	@RequestMapping("/add_weather_view")
+//	public String addWeatherView() {
+//		return "lesson05/addWeatherView";
+//	}
+	
+	@PostMapping("/add_weather_view")
+	public int addWeatherView(
+			 
+			) {
+		
+		return;
 	}
+	
+	
+	
 }
