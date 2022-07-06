@@ -133,5 +133,18 @@
 			</div>
 		</footer>
 	</div>
+	
+	<script>
+		//ready 함수 : DOM tree가 모두 구성된후  불려지는 함수 
+		$(document).ready(function()){
+			
+			$("#date").datepicker({
+				datreFormat:"yy-mm-dd"//표시 포맷	
+					
+			});
+		}
+	
+	
+	</script>
 </body>
 </html>
