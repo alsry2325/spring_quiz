@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ajax 통신하기 퀴즈 1번</title>
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -23,28 +25,29 @@
 </head>
 <body>
 	
-	<div class="container">
-			<h1>즐겨찾기 추가하기</h1>
-			
-			<form  method="post" action="/lesson04/quiz02/add_realtor">
-				<div class="from-group">
-					<label for= "title">제목</label>
-					<input type= "text" id="title" name="title" class= "form-control col-3" placeholder="제목을 입력하셈">
-				</div>
-					
-				<div class="from-group">
-					<label for= "address">주소</label>
-					<input type= "text" id="address" name="address" class= "form-control col-3" placeholder="주소를 입력">
-				</div>
-				
-				<input type="button" class="btn btn-success" value="추가">
-				
-			</form>
-			
-			
-			
-		</div>
-
-
+		<div class="container">
+	<h1>즐겨찾기목록</h1>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>no.</th>
+					<th>이름</th>
+					<th>주소</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${favorites}" var="favorite" varStatus="status">
+					<tr>
+						<td>${status.count}</td>
+						<td>${favorite.name}</td>
+						<td>${favorite.url}</td>
+					</tr>
+				</c:forEach>
+	</table>
+	
+	</div>
+		
+		
+		
 </body>
 </html>
