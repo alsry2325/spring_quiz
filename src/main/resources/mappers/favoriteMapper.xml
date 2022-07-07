@@ -31,4 +31,15 @@
  			`favorite`
  		
 	</select>
+	
+	<select id="selectFavoriteByUrl" parameterType="string" resultType="boolean">
+	
+		SELECT
+			COUNT(*)
+			FROM
+				`favorite`
+				WHERE
+				`url` = #{url}
+	
+	</select>
 </mapper>

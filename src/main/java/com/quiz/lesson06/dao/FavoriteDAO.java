@@ -16,4 +16,6 @@ public interface FavoriteDAO {
 			);
 	
 	public List<Favorite> selectFavorite();
+	
+	public boolean selectFavoriteByUrl(String url);
 }

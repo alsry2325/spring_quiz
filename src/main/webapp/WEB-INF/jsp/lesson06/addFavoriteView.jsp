@@ -31,12 +31,18 @@
 		<form method="post" action="/lesson06/quiz01/add_favorite">
 			<div class="from-group">
 				<label for="name">제목</label> <input type="text" id="name"
-					name="name" class="form-control col-3" placeholder="제목을 입력하셈">
+					name="name" class="form-control col-10" placeholder="제목을 입력하셈">
 			</div>
 
 			<div class="from-group">
-				<label for="url">주소</label> <input type="text" id="url" name="url"
-					class="form-control col-3" placeholder="주소를 입력">
+				<label for="url">주소</label> 
+				<div class="d-flex">
+					<input type="text" id="url" name="url"
+					class="form-control col-10" placeholder="주소를 입력">
+					<button type="button" class="btn btn-info" id="checkBtn">중복확인</button>
+					
+				</div>
+				<small id="warningBox"></small>
 			</div>
 
 			<input type="button" class="btn btn-success btn-block" value="추가" id="addBtn">
@@ -48,6 +54,41 @@
 	</div>
 	<script>
 $(document).ready(function(){
+	
+	$('#checkBtn').on('click',function(){
+		
+		let url = $('#url').val().trim();
+		$('#warningBox').empty(); //자식 태그들을 모두 비움  매번버튼 누를때마다 초기화
+		
+		if(url == ""){
+			$('#warningBox').append('<span class="text-danger">이름이 비어있습니다</span>');
+		}
+		// 이름이 중복되는지 확인 (DB 조회) AJAX 통신
+		$.ajax({
+			//request
+			type:"GET"
+			, url:"/lesson06/quiz02/is_duplication?url="+url
+			
+			//response
+			,success:function(data){
+			
+				if(data.is_Duplication){
+					$('#warningBox').append('<span class="text-danger">url이 중복됨</span>');
+				}else{
+					$('#warningBox').append('<span class="text-danger">저장 가능한url입니다!</span>');
+				}
+				
+			}
+			,error: function(e){
+			alert("중복 확인에 실패함");
+		}
+		});
+		
+		
+	});
+	
+	
+	
 	$('#addBtn').on('click',function(){
 		let name = $('#name').val().trim();
 		
@@ -81,13 +122,16 @@ $(document).ready(function(){
 		//ajax 통신 insert
 		$.ajax({
 			//request
-			type:"POST"		//Request Method
+			type:"POST"		//Request Method  
 			, url:"/lesson06/quiz01/add_favorite"	//Action URL
 			, data:{"name":name, "url":url}  //키 ,변수이름
-			//response
-			,success: function(data){
-				alert(data);
-				location.href = "/lesson06/quiz01/select_favorite_view";
+			//response    "{"result":"success"}"
+			,success: function(data){ // json str을 object로 변환해줌
+				if(data.result == "success"){
+					alert("입력 성공했습니다.");
+					location.href = "/lesson06/quiz01/select_favorite_view";
+				}
+				
 			}
 			, complete: function(data){
 				alert("완료");
