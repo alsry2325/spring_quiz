@@ -1,6 +1,5 @@
 package com.quiz.lesson06;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,13 @@ public class Lesson06Quiz01Controller {
 		return "lesson06/addFavoriteView";
 	}
 
+	
+	 
 	@PostMapping("/quiz01/add_favorite")
 	public String addFavorite(
 			@RequestParam("name") String name, 
 			@RequestParam("url") String url) {
-		System.out.println("name: " + name + ", url: " + url);
+//		System.out.println("name: " + name + ", url: " + url);
 		favoriteBO.addFavorite(name, url);
 
 		return "lesson06/addFavoriteView";
@@ -39,6 +40,7 @@ public class Lesson06Quiz01Controller {
 	@RequestMapping("/quiz01/select_favorite_view")
 	public String selcetFavoriteView(Model model){
 		
+		//select db
 		List<Favorite> favorites = favoriteBO.getFavorite();
 		 
 		

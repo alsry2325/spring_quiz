@@ -39,7 +39,7 @@
 					class="form-control col-3" placeholder="주소를 입력">
 			</div>
 
-			<input type="button" class="btn btn-success" value="추가" id="addBtn">
+			<input type="button" class="btn btn-success btn-block" value="추가" id="addBtn">
 
 		</form>
 
@@ -62,14 +62,23 @@ $(document).ready(function(){
 			return;
 		}
 		
-		console.log(url.indexOf("http"));
+		
+		/* console.log(url.indexOf("http"));
 		if(url.indexOf('http') == -1 && url.indexOf('https') == -1){
 			alert("http를 입력해주셈");
 			return;
+		} */
+		
+		//http 도 아니고(그리고) https도 아닐때 => alert
+		if(url.startsWith("http") === false && url.startsWith("https")){
+			alert("주소 형식이 잘못됨");
+			return;
 		}
+		
 		
 		alert("추가버튼 완료");
 		
+		//ajax 통신 insert
 		$.ajax({
 			//request
 			type:"POST"		//Request Method
@@ -82,7 +91,7 @@ $(document).ready(function(){
 			}
 			, complete: function(data){
 				alert("완료");
-			}
+			} 
 			, error: function(e){
 				alert("error:"+ e);
 			}			
