@@ -70,8 +70,22 @@ public class Lesson06Quiz01Controller {
 			boolean isDuplication = favoriteBO.existFavoriteByUrl(url);
 			
 			Map<String,Boolean> result = new HashMap<>();
-			result.put("is_Duplication", isDuplication);
+			result.put("is_Duplication", isDuplication); //중복인지 아닌지 true면 중복
 			
 			return result;
 	}
+	//게시물 삭제
+	@GetMapping("/quiz02/delete_input")
+	@ResponseBody
+	public Map<String,Object> deleteInput(
+			@RequestParam("id")int id) {
+			favoriteBO.getFavoriteId(id);
+		
+			Map<String, Object> result = new HashMap<>();
+			result.put("result", "success");
+			result.put("result_code", 1);
+			
+			return result;
+	}
+	
 }

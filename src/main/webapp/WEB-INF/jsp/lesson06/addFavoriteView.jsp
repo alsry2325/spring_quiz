@@ -36,13 +36,17 @@
 
 			<div class="from-group">
 				<label for="url">주소</label> 
-				<div class="d-flex">
+				<div class="form-inline">
 					<input type="text" id="url" name="url"
 					class="form-control col-10" placeholder="주소를 입력">
 					<button type="button" class="btn btn-info" id="checkBtn">중복확인</button>
 					
 				</div>
-				<small id="warningBox"></small>
+				<!--<small id="warningBox"></small>  -->
+				<small id="dulicationText" class="text-danger d-none">중복된 url입니다</small>
+				<small id="avaliableUrlText" class="text-success d-none">저장가능한 url입니다</small>
+				
+				
 			</div>
 
 			<input type="button" class="btn btn-success btn-block" value="추가" id="addBtn">
@@ -61,7 +65,9 @@ $(document).ready(function(){
 		$('#warningBox').empty(); //자식 태그들을 모두 비움  매번버튼 누를때마다 초기화
 		
 		if(url == ""){
-			$('#warningBox').append('<span class="text-danger">이름이 비어있습니다</span>');
+			alert("url를 입력하세요.")
+			$('#warningBox').append('<span class="text-danger">url이 비어있습니다</span>');
+			return;
 		}
 		// 이름이 중복되는지 확인 (DB 조회) AJAX 통신
 		$.ajax({
@@ -73,9 +79,15 @@ $(document).ready(function(){
 			,success:function(data){
 			
 				if(data.is_Duplication){
-					$('#warningBox').append('<span class="text-danger">url이 중복됨</span>');
+					/*중복일때  */
+					/* $('#warningBox').append('<span class="text-danger">url이 중복됨</span>'); */
+					$('#dulicationText').removeClass('d-none');
+					$('#avaliableUrlText').addClass('d-none');
 				}else{
-					$('#warningBox').append('<span class="text-danger">저장 가능한url입니다!</span>');
+					/*아닐때  */
+					/* $('#warningBox').append('<span class="text-danger">저장 가능한url입니다!</span>'); */
+					$('#avaliableUrlText').removeClass('d-none');
+					$('#dulicationText').addClass('d-none');
 				}
 				
 			}
@@ -115,7 +127,11 @@ $(document).ready(function(){
 			alert("주소 형식이 잘못됨");
 			return;
 		}
-		
+		//url 중복확인 체크
+		//d-none이 있을 때
+		if($('#avaliableUrlText').hasClass('d-none')){
+			alert("url 종복확인을 다시 해주세요"); 
+		}
 		
 		alert("추가버튼 완료");
 		

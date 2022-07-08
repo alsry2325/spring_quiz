@@ -34,20 +34,45 @@
 					<th>이름</th>
 					<th>주소</th>
 				</tr>
+				
 			</thead>
 			<tbody>
 				<c:forEach items="${favorites}" var="favorite" varStatus="status">
 					<tr>
-						<td>${status.count}</td>
+						<td>${favorite.id}</td>
 						<td>${favorite.name}</td>
 						<td>${favorite.url}</td>
+						<td>
+							<!--(1) name 속성과 value 속성을 이용해서 동적으로 삭제 감지(권장 안함)  -->
+							<%-- <button type="button" name="delBtn" value="${favorite.id}" class="btn btn-info deleteBtn">삭제</button> --%>
+							
+							<!--(2) data를 이용해서 태그에 data를 임시 저장해놓기  -->
+							<button type="button" class="btn btn-info deleteBtn">삭제</button>
+						</td>
 					</tr>
 				</c:forEach>
 	</table>
 	
 	</div>
+<script>
+$(document).ready(function(){
+	<!--(1) name 속성과 value 속성을 이용해서 동적으로 삭제 감지(권장 안함)  -->
+	$('button[name=delBtn]').on('click',function(e){
+			/* let id = $(this).attr('value'); */
+			
+					e.target.value;
+	   
+			alert(id);
+		/* if (confirm("정말 삭제하시겠습니까 ?")) {
+			console.log(confirm())
+		} */
 		
-		
+	});
+	
+});
+
+
+</script>
 		
 </body>
 </html>
