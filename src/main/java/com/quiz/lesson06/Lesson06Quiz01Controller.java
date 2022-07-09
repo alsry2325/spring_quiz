@@ -75,7 +75,7 @@ public class Lesson06Quiz01Controller {
 			return result;
 	}
 	//게시물 삭제
-	@GetMapping("/quiz02/delete_input")
+	@PostMapping("/quiz02/delete_favorite")
 	@ResponseBody
 	public Map<String,Object> deleteInput(
 			@RequestParam("id")int id) {

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+
+.main_link {
+    font-weight: bold;
+    color: white;
+}
+
+#wrap{
+    width:  1200px;
+    margin: auto;
+}
+
+.color_peru{
+    background-color: peru;
+}
+
+.color_sandybrown{
+    background-color: chocolate;
+}
+
+.small_font{
+    font-size: small;
+}
+
+li :hover{
+    background-color: powderblue;
+}
+
+#reserve_layout{
+    height: 250px;
+}
+
+#big_text{
+    display: 4;
+}
