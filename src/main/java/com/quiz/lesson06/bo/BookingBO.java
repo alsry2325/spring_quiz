@@ -20,5 +20,11 @@ public class BookingBO {
 		
 		return bookingDAO.selectbookingList();
 	}
+
+	public void deleteBookingById(int id) {
+		
+		bookingDAO.deleteBookingById(id);
+	}
+	
 	
 }

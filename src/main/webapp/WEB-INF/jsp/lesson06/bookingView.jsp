@@ -36,7 +36,7 @@
                 <ul class="nav nav-fill">
                     <li class="nav-item"><a class="nav-link main_link" href="#">펜션소개</a></li>
                     <li class="nav-item"><a class="nav-link main_link" href="#">객실보기</a></li>
-                    <li class="nav-item"><a class="nav-link main_link" href="#">예약안내</a></li>
+                    <li class="nav-item"><a class="nav-link main_link" href="/lesson06/reservation_View">예약안내</a></li>
                     <li class="nav-item"><a class="nav-link main_link" href="#">커뮤니티</a></li>
                 </ul>
             </nav>
@@ -78,8 +78,11 @@
 												<span class='text-primary'>${booking.state}</span>
 											</td>
 										</c:when>
+										<c:when test="${booking.state eq '취소'}">
+											<span class="text-danger">${booking.state}</span>
+										</c:when>
 									</c:choose>
-									<td><button type="button" class="btn btn-danger del-btn" data-favorite-id="">삭제</button></td>
+									<td><button type="button" class="btn btn-danger del-btn" data-booking-id="${booking.id}">삭제</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -90,16 +93,43 @@
             </article>
             <footer>
             	<div>
-            		제주특별차치도 제주시 애월읍<br>
-            		사업자등록번호:111-22-255222/ 농어촌민박사업자지정/ 대표:정민교<br>
-            		Copyright2025 tongnamu,All right reserved
+            		<small class="text-secondary"> 제주특별자치도 제주시 애월읍<br>
+						사업자등록번호: 111-22-255222 / 농어촌민박사업자지정 / 대표:김통목<br> Copyright 2025
+						tongnamu. All right reserved.
+					</small>
             	</div>
             
             </footer>
         </div>
 
-        <script>
-              
-        </script>
+<script>
+$(document).ready(function(){
+	//class로 줄때는 .을 해줘야함
+	$('.del-btn').on('click',function(){
+		let bookingId = $(this).data('booking-id');
+		alert(bookingId);
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/lesson06/delete_booking"
+			, data: {"id":bookingId}
+			, success: function(data) {
+				// {"result":"success"}
+				if (data.result == "success") {
+					alert("삭제 되었습니다.");
+					location.reload(true);
+				}
+			}
+			, error: function(e) {
+				alert("통신에 실패했습니다.");
+			}
+		});
+		
+	});
+});
+
+
+
+</script>
 </body>
 </html>
