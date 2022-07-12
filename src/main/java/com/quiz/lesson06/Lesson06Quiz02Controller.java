@@ -49,12 +49,13 @@ public class Lesson06Quiz02Controller {
 		
 		return"lesson06/reservationView";
 	}
-//	@PostMapping("/add_Booking")
-//	public String addBooking(
-//					
-//			) {
-//		
-//	}
+	@ResponseBody
+	@PostMapping("/add_Booking")
+	public String addBooking(
+				RequestParam("")	
+			) {
+		return;
+	}
 	
 	// POST / GET       PUT DELETE      RESTFUL API
 		// AJAX 통신  삭제
