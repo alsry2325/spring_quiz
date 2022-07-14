@@ -30,8 +30,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- stylesheet -->
-<link rel="stylesheet" type="text/css"
-	href="/css/lesson06_booking.css">
+<link rel="stylesheet" type="text/css" href="/css/lesson06_booking.css">
 </head>
 
 <body>
@@ -41,13 +40,13 @@
 		</header>
 		<nav>
 			<ul class="nav nav-fill">
-				<li class="nav-item"><a href="#"
+				<li class="nav-item"><a href="/lesson06/main_view"
 					class="nav-link text-white font-weight-bold">팬션소개</a></li>
 				<li class="nav-item"><a href="#"
 					class="nav-link text-white font-weight-bold">객실보기</a></li>
-				<li class="nav-item"><a href="/lesson06/quiz03/2"
+				<li class="nav-item"><a href="/lesson06/reservation_view"
 					class="nav-link text-white font-weight-bold">예약하기</a></li>
-				<li class="nav-item"><a href="/lesson06/quiz03/1"
+				<li class="nav-item"><a href="/lesson06/booking_list_view"
 					class="nav-link text-white font-weight-bold">예약목록</a></li>
 			</ul>
 		</nav>
@@ -105,23 +104,64 @@
 			</small>
 		</footer>
 	</div>
-	
-<script>
-$(document).ready(function() {
-	// banner
-	let bannerList = ["/images/banner1.jpg", "/images/banner2.jpg", "/images/banner3.jpg", "/images/banner4.jpg"];
-    let currentImageIndex = 0;
-    setInterval(function() {
-        $("#bannerImage").attr("src", bannerList[currentImageIndex]);
-        currentImageIndex++;
-        if(currentImageIndex == bannerList.length) {
-            currentImageIndex = 0;
-        }
-    }, 3000); 
-    
-    
-});
-</script>
+
+	<script>
+		$(document).ready(
+				function() {
+					// banner
+					let bannerList = [ "/img/banner1.jpg",
+							"/img/banner2.jpg", "/img/banner3.jpg",
+							"/img/banner4.jpg" ];
+					let currentImageIndex = 0;
+					setInterval(function() {
+						$("#bannerImage").attr("src",
+								bannerList[currentImageIndex]);
+						currentImageIndex++;
+						if (currentImageIndex == bannerList.length) {
+							currentImageIndex = 0;
+						}
+					}, 3000);
+					
+					// 조회하기 버튼 클릭
+				    $('.submit-btn').on('click', function() {
+				    	let name = $('#name').val().trim();
+				    	let phoneNumber = $('#phoneNumber').val().trim();
+				    	
+				    	if (name == "") {
+				    		alert("이름 입력하세요");
+				    		return;
+				    	}
+				    	
+				    	if (phoneNumber == "") {
+				    		alert("전화번호 입력하세요");
+				    		return;
+				    	}
+				    	
+				    	if (phoneNumber.startsWith("010") == false) {
+				    		alert("010으로 시작하는 번호만 입력 가능합니다.");
+				    		return;
+				    	}
+				    	
+				    	$.ajax({
+				    		type:"POST"
+				    		, url: "/lesson06/main_select"
+				    		, data: {"name":name, "phoneNumber":phoneNumber}
+				    		, success: function(data) {
+				    			//alert(data.result);
+				    			alert("이름:" + data.booking.name 
+				    					+ "\n날짜:" + data.booking.date.substring(0, 10)
+				    					+ "\n일수:" + data.booking.day
+				    					+ "\n인원:" + data.booking.headcount
+				    					+ "\n상태:" + data.booking.state);
+				    		}
+				    		, error:function(e) {
+				    			alert("통신이 실패했습니다.");
+				    		}
+				    	});
+				    });
+					
+				});
+	</script>
 
 </body>
 </html>
